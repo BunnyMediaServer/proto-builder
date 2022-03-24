@@ -1,7 +1,10 @@
 # Src: https://github.com/jonashackt/docker-hello-world/blob/main/.github/workflows/publish.yml
 name: publish
 
-on: [push]
+on:
+  push:
+    tags:
+      - 'v*.*.*'
 
 jobs:
   publish-image:
@@ -18,8 +21,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Docker image
-        # TODO: Figure out a way to version this according to tags pushed and ONLY run this action when pushing a new TAG
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
         run: |
-          docker build . --tag ghcr.io/bunnymediaserver/proto-builder:latest
+          docker build . --tag ghcr.io/bunnymediaserver/proto-builder:${{github.ref_name}}
           # docker run ghcr.io/BunnyMediaServer/proto-builder:latest
-          docker push ghcr.io/bunnymediaserver/proto-builder:latest
+          docker push ghcr.io/bunnymediaserver/proto-builder:${{github.ref_name}}
