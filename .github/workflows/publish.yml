@@ -21,9 +21,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Docker image
-        env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
         run: |
           docker build . --tag ghcr.io/bunnymediaserver/proto-builder:${{github.ref_name}}
-          # docker run ghcr.io/BunnyMediaServer/proto-builder:latest
           docker push ghcr.io/bunnymediaserver/proto-builder:${{github.ref_name}}
