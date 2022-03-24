@@ -1,4 +1,5 @@
 FROM golang:1.17.8
+LABEL org.opencontainers.image.source="https://github.com/BunnyMediaServer/proto-builder"
 WORKDIR /tmp
 
 # Set env variables, stabilize versions of each compiler component

@@ -1,0 +1,24 @@
+# Src: https://github.com/jonashackt/docker-hello-world/blob/main/.github/workflows/publish.yml
+name: publish
+
+on: [push]
+
+jobs:
+  publish-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build the Docker image
+        run: |
+          docker build . --tag ghcr.io/BunnyMediaServer/proto-builder:latest
+          # docker run ghcr.io/BunnyMediaServer/proto-builder:latest
+          docker push ghcr.io/BunnyMediaServer/proto-builder:latest
