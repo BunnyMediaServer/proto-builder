@@ -18,6 +18,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Docker image
+        # TODO: Figure out a way to version this according to tags pushed and ONLY run this action when pushing a new TAG
         run: |
           docker build . --tag ghcr.io/bunnymediaserver/proto-builder:latest
           # docker run ghcr.io/BunnyMediaServer/proto-builder:latest
