@@ -33,6 +33,7 @@ COPY . .
 RUN cat go.mod
 RUN go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
 RUN go mod download
+RUN go mod download github.com/planetscale/vtprotobuf && go mod download storj.io/drpc
 RUN go install \
             google.golang.org/protobuf/cmd/protoc-gen-go \
             google.golang.org/grpc/cmd/protoc-gen-go-grpc \
