@@ -1,10 +1,10 @@
-FROM golang:1.17.8
+FROM golang:1.22
 LABEL org.opencontainers.image.source="https://github.com/BunnyMediaServer/proto-builder"
 WORKDIR /tmp
 
 # Set env variables, stabilize versions of each compiler component
 RUN echo "${PATH}"
-ENV PROTOBUF_VERSION="3.19.4"
+ENV PROTOBUF_VERSION="26.1"
 ENV PROTOC_ZIP="protoc-${PROTOBUF_VERSION}-linux-x86_64.zip"
 ENV PROTOC_URL="https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOBUF_VERSION}/${PROTOC_ZIP}"
 # "https://github.com/protocolbuffers/protobuf/releases/download/v3.20.0-rc1/protoc-3.20.0-rc-1-linux-x86_64.zip"
