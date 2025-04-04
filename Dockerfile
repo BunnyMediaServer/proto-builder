@@ -31,14 +31,7 @@ RUN protoc --version
 WORKDIR /proto
 COPY . .
 RUN cat go.mod
-RUN go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
 RUN go mod download
-RUN go mod download github.com/planetscale/vtprotobuf && go mod download storj.io/drpc
-RUN go install \
-            google.golang.org/protobuf/cmd/protoc-gen-go \
-            google.golang.org/grpc/cmd/protoc-gen-go-grpc \
-            github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto \
-            storj.io/drpc/cmd/protoc-gen-go-drpc
+RUN go install tool
 # Cleanup for execution
 RUN rm go.*
-RUN rm *.go
